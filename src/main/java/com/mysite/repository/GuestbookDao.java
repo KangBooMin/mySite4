@@ -13,14 +13,6 @@ public class GuestbookDao {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-/*	public int delete(int no, String password) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("no", no);
-		map.put("password", password);
-		
-		return sqlSession.delete("guestbook.delete", map);
-	}*/
 
 	public int insert(GuestbookVo vo) {
 		return sqlSession.insert("guestbook.insert", vo);
