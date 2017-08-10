@@ -41,5 +41,31 @@
 		]]>
 	</insert>
 	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from board
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<select id = "modifyForm" parameterType = "int" resultMap = "resultMapList">
+		<![CDATA[
+			select title, content, no, user_no
+			from board
+			where no = #{no}
+		]]>
+	</select>
+	
+	<update id="modify" parameterType = "com.mysite.vo.BoardVo">
+		<![CDATA[
+			update board 
+			set title = #{title},
+			content = #{content}
+			where NO = #{no}
+		]]>
+	
+	</update>
+	
+	
 	
 </mapper>

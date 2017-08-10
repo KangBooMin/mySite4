@@ -29,8 +29,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String read(@RequestParam("no") int no, Model model) {
+	public String read(@RequestParam("no") int no,
+					   @RequestParam("userNo") int userNo, Model model) {
 		BoardVo boardVo = boardService.read(no);
+		boardVo.setUserNo(userNo);
 		model.addAttribute("vo", boardVo);
 		
 		return "board/read";
@@ -46,6 +48,29 @@ public class BoardController {
 	public String write(@ModelAttribute BoardVo boardVo) {
 		boardService.write(boardVo);
 		
+		return "redirect:/board/list";
+	}
+
+	@RequestMapping(value = "delete")
+	public String delete(int no){
+		boardService.delete(no);
+		
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping(value = "modifyform")
+	public String modifyform(int no, Model model){
+		BoardVo modifyForm = boardService.modifyForm(no);
+		model.addAttribute("vo", modifyForm);
+		
+		return "board/modifyform";
+	}
+
+	@RequestMapping(value = "modify")
+	public String modify(BoardVo modifyVo, Model model){
+		
+		boardService.modify(modifyVo);
+			
 		return "redirect:/board/list";
 	}
 	

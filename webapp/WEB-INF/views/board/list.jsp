@@ -34,18 +34,19 @@
 					<c:forEach items="${list }" var="vo">
 						<tr>
 							<td>${vo.no }</td>
-							<td><a href="${pageContext.request.contextPath}/board/read?no=${vo.no }">${vo.title }</a></td>
+							<td><a href="${pageContext.request.contextPath}/board/read?no=${vo.no}&userNo=${vo.userNo}">${vo.title }</a></td>
 							<td>${vo.name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.date }</td>
 
 							<c:choose>
-								<c:when test="${authUser.no == vo.userNo }">
-									<td><a href="${pageContext.request.contextPath}/board/delete?no=${vo.no }"
-										class="del">삭제</a></td>
-								</c:when>
-								<c:otherwise>
-									<td></td>
+			 					<c:when test = "${authUser == null}">
+			 						<td>로그인 필요</td>
+			 					</c:when>
+			 					<c:otherwise>
+			 					<c:if test ="${authUser.no == vo.userNo}">
+									<td><a href="${pageContext.request.contextPath}/board/delete?no=${vo.no}" class="del">삭제</a></td>
+								</c:if>
 								</c:otherwise>
 							</c:choose>
 							

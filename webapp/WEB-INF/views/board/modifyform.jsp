@@ -32,7 +32,7 @@
 							</td>
 						</tr>
 					</table>
-					<input type="hidden" name="boardNo" value="${vo.no }">
+					<input type="hidden" name="no" value="${vo.no }">
 					<div class="bottom">
 						<a href="${pageContext.request.contextPath}/board/list">취소</a>
 						<input type="submit" value="수정">

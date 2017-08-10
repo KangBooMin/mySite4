@@ -24,7 +24,18 @@ public class BoardDao {
 	
 	public int write(BoardVo boardVo) {
 		return sqlSession.insert("board.insert", boardVo);
-		
 	}
 	
+	public int delete(int no) {
+		return sqlSession.delete("board.delete", no);
+	}
+	
+	public BoardVo modifyForm(int no) {
+		return sqlSession.selectOne("board.modifyForm", no);
+	}
+
+	public int modify(BoardVo modifyVo) {
+		System.out.println("dao");
+		return sqlSession.update("board.modify", modifyVo);
+	}
 }

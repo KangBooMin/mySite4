@@ -37,4 +37,17 @@ public class BoardService {
 		return boardDao.write(boardVo);
 	}
 	
+	public int delete(int no) {
+		return boardDao.delete(no);
+	}
+	
+	public BoardVo modifyForm(int no) {
+		return boardDao.modifyForm(no);
+	}
+
+	public int modify(BoardVo modifyVo) {
+		System.out.println("service");
+		return boardDao.modify(modifyVo);
+	}
+	
 }
