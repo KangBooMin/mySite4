@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="replyboard">
+
+	<resultMap id="resultMapList" type="com.mysite.vo.ReplyboardVo">
+			<result column = "no" property="no" />
+			<result column = "title" property="title" />
+			<result column = "content" property="content" />
+			<result column = "reg_date" property="date" />
+			<result column = "user_no" property="userNo" />
+			<result column = "name" property="name" />
+			<result column = "group_no" property="groupNo" />
+			<result column = "order_no" property="orderNo" />
+			<result column = "depth" property="depth" />
+	</resultMap>
+
+	<select id="getList" resultMap="resultMapList">
+		<![CDATA[
+			select b.no, title, content, hit, reg_date, user_no, name
+			from users u, replyboard b
+			where u.no = b.user_no
+			order by b.no desc
+		]]>
+	</select>
+	
+	<select id="read" parameterType="int" resultType="com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			select no, title, content, hit, user_no 
+			from replyboard 
+			where no = #{no}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			insert into replyboard
+			values (seq_replyboard_no.nextval, 
+					#{title},
+					#{content}, 
+					0, 
+					TO_DATE(#{date},'YYYY-MM-DD hh24:mi:ss'), 
+					1, 
+					seq_replyboard_no.currval, 
+					1, 
+					0)        
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete from replyboard
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<select id = "modifyForm" parameterType = "int" resultMap = "resultMapList">
+		<![CDATA[
+			select title, content, no, user_no
+			from replyboard
+			where no = #{no}
+		]]>
+	</select>
+	
+	<update id="modify" parameterType = "com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			update replyboard
+			set title = #{title},
+			content = #{content}
+			where no = #{no}
+		]]>
+	
+	</update>
+	
+	<update id="hitUpdate" parameterType = "com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			update replyboard
+			set hit = hit+1
+			where no = #{no}
+		]]>
+	
+	</update>
+	
+	<update id="replyUpdate1" parameterType = "com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			update replyboard
+			set order_no = order_no+1
+			where group_no = #{groupNo}
+			and order_no > #{orderNo}
+		]]>
+	
+	</update>
+	
+	<update id="replyUpdate2" parameterType = "com.mysite.vo.ReplyboardVo">
+		<![CDATA[
+			update replyboard
+			set order_no = order_no+1,
+    			depth = depth+1
+			where no = #{no}
+		]]>
+	
+	</update>
+	
+	
+</mapper>

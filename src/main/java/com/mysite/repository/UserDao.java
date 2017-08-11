@@ -35,7 +35,6 @@ public class UserDao {
 	}
 	
 	public int updateUser(UserVo userVo) {
-		System.out.println(userVo.toString());
 		return sqlSession.update("user.update", userVo);
 	}
 
