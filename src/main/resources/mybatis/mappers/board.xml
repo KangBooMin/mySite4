@@ -61,7 +61,16 @@
 			update board 
 			set title = #{title},
 			content = #{content}
-			where NO = #{no}
+			where no = #{no}
+		]]>
+	
+	</update>
+	
+	<update id="hitUpdate" parameterType = "com.mysite.vo.BoardVo">
+		<![CDATA[
+			update board 
+			set hit = hit+1
+			where no = #{no}
 		]]>
 	
 	</update>

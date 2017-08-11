@@ -35,7 +35,11 @@ public class BoardDao {
 	}
 
 	public int modify(BoardVo modifyVo) {
-		System.out.println("dao");
 		return sqlSession.update("board.modify", modifyVo);
 	}
+	
+	public int hitUpdate(int no) {
+		return sqlSession.update("board.hitUpdate", no);
+	}
+	
 }

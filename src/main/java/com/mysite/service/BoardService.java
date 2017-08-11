@@ -21,6 +21,8 @@ public class BoardService {
 	}	
 	
 	public BoardVo read(int no) {
+		boardDao.hitUpdate(no);
+		
 		return boardDao.read(no);
 	}
 	
@@ -46,8 +48,8 @@ public class BoardService {
 	}
 
 	public int modify(BoardVo modifyVo) {
-		System.out.println("service");
 		return boardDao.modify(modifyVo);
 	}
+	
 	
 }
