@@ -20,7 +20,7 @@
 			select b.no, title, content, hit, reg_date, user_no, name
 			from users u, replyboard b
 			where u.no = b.user_no
-			order by b.no desc
+			order by group_no, order_no asc
 		]]>
 	</select>
 	
@@ -81,25 +81,28 @@
 	
 	</update>
 	
-	<update id="replyUpdate1" parameterType = "com.mysite.vo.ReplyboardVo">
+	<update id="replyUpdate" parameterType="Map">
 		<![CDATA[
 			update replyboard
-			set order_no = order_no+1
+			set order_no = order_no + 1
 			where group_no = #{groupNo}
 			and order_no > #{orderNo}
 		]]>
-	
 	</update>
 	
-	<update id="replyUpdate2" parameterType = "com.mysite.vo.ReplyboardVo">
+	<insert id="replyInsert" parameterType="com.mysite.vo.ReplyboardVo">
 		<![CDATA[
-			update replyboard
-			set order_no = order_no+1,
-    			depth = depth+1
-			where no = #{no}
+			 insert into replyboard
+			 		values(seq_board_no.nextval, 
+					#{title},
+					#{content},
+					0,
+					sysdate,
+					#{userNo},
+					#{groupNo},
+					#{orderNo},
+					#{depth})
 		]]>
-	
-	</update>
-	
+	</insert>
 	
 </mapper>

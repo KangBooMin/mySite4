@@ -34,7 +34,9 @@
 					</tr>
 				</table>
 				<div class="bottom">
+				
 					<a href="${pageContext.request.contextPath}/replyboard/list">글목록</a>
+					
 					<c:if test="${vo.userNo == authUser.no }">
 						<a href="${pageContext.request.contextPath}/replyboard/modifyform?no=${vo.no }">글수정</a>
 					</c:if>
@@ -43,6 +45,7 @@
 							<a href="${pageContext.request.contextPath}/replyboard/replyform?no=${vo.no }">댓글 달기</a>
 						</c:if>
 					</c:if>
+				
 				</div>
 			</div>
 		</div>

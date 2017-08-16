@@ -30,7 +30,11 @@ public class ReplyBoardController {
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(@RequestParam("no") int no,
-					   @RequestParam("userNo") int userNo, Model model) {
+					   @RequestParam("userNo") int userNo,
+					   @RequestParam("groupNo") int groupNo,
+					   @RequestParam("orderNo") int orderNo,
+					   @RequestParam("depth") int depth,
+					   Model model) {
 		ReplyboardVo replyboardVo = replyboardService.read(no);
 		replyboardVo.setUserNo(userNo);
 		model.addAttribute("vo", replyboardVo);
@@ -74,15 +78,17 @@ public class ReplyBoardController {
 		return "redirect:/replyboard/list";
 	}
 	
-	@RequestMapping("/replyform")
-	public String replyform() {
+	@RequestMapping(value = "replyform")
+	public String replyform(int no, Model model){
+		model.addAttribute("replyVo", replyboardService.read(no));
 		
-		return "/replyboard/replyform";
+		return "replyboard/replyform";
 	}
 	
-	@RequestMapping(value="/reply", method = RequestMethod.POST)
-	public String reply(@ModelAttribute ReplyboardVo replyboardVo) {
-		replyboardService.reply(replyboardVo);
+	@RequestMapping(value = "reply")
+	public String reply(ReplyboardVo replyVo, Model model){
+		replyboardService.reply(replyVo);
+		model.addAttribute("boardRead", replyVo);
 		
 		return "redirect:/replyboard/list";
 	}

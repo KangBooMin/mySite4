@@ -34,7 +34,7 @@
 					<c:forEach items="${list }" var="vo">
 						<tr>
 							<td>${vo.no }</td>
-							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}&userNo=${vo.userNo}">${vo.title }</a></td>
+							<td><a href="${pageContext.request.contextPath}/replyboard/read?no=${vo.no}&userNo=${vo.userNo}&groupNo=${vo.groupNo}&orderNo=${vo.orderNo}&depth=${vo.depth}">${vo.title }</a></td>
 							<td>${vo.name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.date }</td>

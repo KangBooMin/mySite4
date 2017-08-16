@@ -51,11 +51,10 @@ public class ReplyboardService {
 		return replyboardDao.modify(modifyVo);
 	}
 	
-	public int reply(ReplyboardVo replyboardVo) {
-		replyboardDao.replyUpdate1(replyboardVo);
-		replyboardDao.replyUpdate2(replyboardVo);
+	public int reply(ReplyboardVo replyVo) {
 		
-		return replyboardDao.write(replyboardVo);
+		replyboardDao.replyUpdate(replyVo.getGroupNo(), replyVo.getOrderNo());
+		
+		return replyboardDao.replyInsert(replyVo);
 	}
-	
 }
